@@ -15,7 +15,7 @@ class TestRuleParser(unittest.TestCase):
         rule = create_rule(self.rule_location)
         rule_dict = rule.to_dict()
         actual_output = json.dumps(rule_dict,indent=2)
-        print(actual_output)
+        # print(actual_output)
         expected_output = ""
         with open(self.rule_output_location, 'r') as file:
             expected_output = file.read()

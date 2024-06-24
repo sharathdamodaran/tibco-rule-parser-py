@@ -120,8 +120,15 @@ def create_rule(rule_location):
     for i in range(matrix_length):
         expression = model.Expression(i, actions, conditions)
         expressions.append(expression)
-
     rule.expressions=expressions
+
+    if error_section != "":
+        errors = []
+        for statements in [s for s in error_section.split(" ON") if s]:
+            error = model.Error(statements)
+            errors.append(error)
+        rule.errors = errors
+
     return rule
 
 # rule = create_rule("resources/rule_example2.md")

@@ -71,5 +71,19 @@
         }
       ]
     }
+  ],
+  "errors": [
+    {
+      "type": "Exception",
+      "value": "GETFAIL",
+      "actions": [
+        {
+          "type": null,
+          "value": "CALL ENDMSG('POSITION IS INVALID');",
+          "parameters": [],
+          "dependencies": []
+        }
+      ]
+    }
   ]
 }
