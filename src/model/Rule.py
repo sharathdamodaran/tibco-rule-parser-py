@@ -6,6 +6,8 @@ class Rule:
         self.expressions = expressions if expressions is not None else []
     
     def __init__(self, declaration_section):
+        self.variables = []
+        self.parameters = []
         for statement in declaration_section.split("\n"):
             invalid_statement = ";" not in statement
             if invalid_statement:
@@ -20,8 +22,6 @@ class Rule:
                 self.parameters=rule_params.split(",")
             else:
                 self.name=statement[:statement.find(";")].strip()
-                self.parameters=[]
-
         
     def to_dict(self):
         return {

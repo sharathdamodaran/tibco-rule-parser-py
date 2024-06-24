@@ -80,7 +80,7 @@ def convert_action_value_to_boolean(value):
 conditions = []
 actions = []
 
-with open('src/resources/RuleExample3.md', 'r') as file:
+with open('src/resources/RuleExample2.md', 'r') as file:
     sections = file.read().split('--------------\n')
 
 first_section = sections[0]
@@ -104,14 +104,17 @@ for statement in condition_section.split("\n"):
 
 prev_action = None
 for statement in action_section.split("\n"):
-    if statement.startswith("_ ---"):
+    if statement.startswith(" ---"):
         continue
     is_new, action = model.ActionStatement.create_or_update(statement.strip(), prev_action)
     if is_new:
         prev_action=action
         actions.append(action)
+
 expressions = []
-matrix_length = len(conditions[0].values)
+matrix_length = 1
+if len(conditions)>0:
+    matrix_length = len(conditions[0].values)
 
 for i in range(matrix_length):
     expression = model.Expression(i, actions, conditions)

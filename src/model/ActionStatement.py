@@ -5,7 +5,7 @@ class ActionStatement:
     
     @classmethod
     def create_or_update(cls, action_statement, prev_action):
-        statements = action_statement.split("¦")
+        statements = action_statement.split("|")
         action_matrix_values = []
         if len(statements) == 1 or not statements[1].strip():
             prev_action.statement=prev_action.statement + "\n" + statements[0]
@@ -15,7 +15,7 @@ class ActionStatement:
                 action_matrix_values.append(
                     cls.convert_action_value_to_boolean(statements[1][i])
                 )
-            return True, cls(statements[0],action_matrix_values)
+            return True, cls(statements[0].strip(),action_matrix_values)
     
     @staticmethod    
     def convert_action_value_to_boolean(value):
