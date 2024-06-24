@@ -7,16 +7,20 @@ class Rule:
     
     def __init__(self, declaration_section):
         for statement in declaration_section.split("\n"):
-            if statement.startswith("_ ---"):
+            invalid_statement = ";" not in statement
+            if invalid_statement:
                 continue
-            if statement.startswith("_ LOCAL "):
+            if "LOCAL" in statement:
                 rule_vars = statement.split("LOCAL")[1].split(";")[0]
                 self.variables=rule_vars.split(",")
-            else:
+            if "(" in statement:
                 rule_def = statement.split("(")
                 self.name=rule_def[0]
                 rule_params = rule_def[1].split(")")[0]
                 self.parameters=rule_params.split(",")
+            else:
+                self.name=statement[:statement.find(";")].strip()
+                self.parameters=[]
 
         
     def to_dict(self):
