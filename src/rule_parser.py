@@ -76,51 +76,55 @@ def convert_action_value_to_boolean(value):
         return True
     else:
         return False
-    
-conditions = []
-actions = []
 
-with open('src/resources/RuleExample2.md', 'r') as file:
-    sections = file.read().split('--------------\n')
+def create_rule(rule_location):    
+    conditions = []
+    actions = []
 
-first_section = sections[0]
-first_sections = first_section.split('+---------------------------------------------------------------------------+\n')
+    with open(rule_location, 'r') as file:
+        sections = file.read().split('--------------\n')
 
-declaration_section = first_sections[0]
-summary_section = first_section[1]
-condition_section = first_sections[2]
-action_section = sections[1]
-error_section = ""
-if len(sections)==3:
-    error_section = sections[2]
+    first_section = sections[0]
+    first_sections = first_section.split('+---------------------------------------------------------------------------+\n')
 
-rule = model.Rule(declaration_section)
+    declaration_section = first_sections[0]
+    summary_section = first_section[1]
+    condition_section = first_sections[2]
+    action_section = sections[1]
+    error_section = ""
+    if len(sections)==3:
+        error_section = sections[2]
 
-for statement in condition_section.split("\n"):
-    if statement.startswith(" ---"):
-        continue
-    condition = model.Condition(statement.strip())
-    conditions.append(condition)
+    rule = model.Rule(declaration_section)
 
-prev_action = None
-for statement in action_section.split("\n"):
-    if statement.startswith(" ---"):
-        continue
-    is_new, action = model.ActionStatement.create_or_update(statement.strip(), prev_action)
-    if is_new:
-        prev_action=action
-        actions.append(action)
+    for statement in condition_section.split("\n"):
+        if statement.startswith(" ---"):
+            continue
+        condition = model.Condition(statement.strip())
+        conditions.append(condition)
 
-expressions = []
-matrix_length = 1
-if len(conditions)>0:
-    matrix_length = len(conditions[0].values)
+    prev_action = None
+    for statement in action_section.split("\n"):
+        if statement.startswith(" ---"):
+            continue
+        is_new, action = model.ActionStatement.create_or_update(statement.strip(), prev_action)
+        if is_new:
+            prev_action=action
+            actions.append(action)
 
-for i in range(matrix_length):
-    expression = model.Expression(i, actions, conditions)
-    expressions.append(expression)
+    expressions = []
+    matrix_length = 1
+    if len(conditions)>0:
+        matrix_length = len(conditions[0].values)
 
-rule.expressions=expressions
+    for i in range(matrix_length):
+        expression = model.Expression(i, actions, conditions)
+        expressions.append(expression)
+
+    rule.expressions=expressions
+    return rule
+
+rule = create_rule("resources/RuleExample2.md")
 rule_dict = rule.to_dict()
 json_string = json.dumps(rule_dict)
 print(json_string)
