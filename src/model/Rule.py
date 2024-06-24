@@ -13,13 +13,13 @@ class Rule:
             if invalid_statement:
                 continue
             if "LOCAL" in statement:
-                rule_vars = statement.split("LOCAL")[1].split(";")[0]
-                self.variables=rule_vars.split(",")
-            if "(" in statement:
+                rule_vars = statement.split("LOCAL")[1].split(";")[0].strip()
+                self.variables=rule_vars.split(", ")
+            elif "(" in statement:
                 rule_def = statement.split("(")
-                self.name=rule_def[0]
+                self.name=rule_def[0].strip()
                 rule_params = rule_def[1].split(")")[0]
-                self.parameters=rule_params.split(",")
+                self.parameters=rule_params.split(", ")
             else:
                 self.name=statement[:statement.find(";")].strip()
         

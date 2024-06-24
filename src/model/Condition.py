@@ -4,7 +4,7 @@ class Condition:
         self.values = values if values is not None else []
         
     def __init__(self, statement):
-        statements = statement.split("¦")
+        statements = statement.split("|")
         condition_matrix_values = []
         if len(statements) > 1:
             for i in range(1, len(statements[1]), 2):

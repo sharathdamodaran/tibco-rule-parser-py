@@ -88,14 +88,14 @@ def create_rule(rule_location):
     first_sections = first_section.split('+---------------------------------------------------------------------------+\n')
 
     declaration_section = first_sections[0]
-    summary_section = first_section[1]
+    summary_section = first_sections[1]
     condition_section = first_sections[2]
     action_section = sections[1]
     error_section = ""
     if len(sections)==3:
         error_section = sections[2]
 
-    rule = model.Rule(declaration_section)
+    rule = model.Rule(declaration_section, summary_section)
 
     for statement in condition_section.split("\n"):
         if statement.startswith(" ---"):
@@ -124,7 +124,7 @@ def create_rule(rule_location):
     rule.expressions=expressions
     return rule
 
-rule = create_rule("resources/RuleExample2.md")
-rule_dict = rule.to_dict()
-json_string = json.dumps(rule_dict)
-print(json_string)
+# rule = create_rule("resources/rule_example2.md")
+# rule_dict = rule.to_dict()
+# json_string = json.dumps(rule_dict)
+# print(json_string)
