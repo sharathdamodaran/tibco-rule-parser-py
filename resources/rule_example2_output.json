@@ -85,5 +85,19 @@
         }
       ]
     }
+  ],
+  "dependencies": [
+    {
+      "type": "Database",
+      "value": "EMPLOYEES"
+    },
+    {
+      "type": "Rule",
+      "value": "REPLACE_SALARY"
+    },
+    {
+      "type": "Rule",
+      "value": "MSGLOG"
+    }
   ]
 }

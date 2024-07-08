@@ -17,7 +17,7 @@ class ActionStatement:
                 )
             return True, cls(statements[0].strip(),action_matrix_values)
     
-    @staticmethod    
+    @staticmethod 
     def convert_action_value_to_boolean(value):
         if value.isdigit():
             return True
