@@ -2,3 +2,4 @@
 env
 __pycache__
 resources/rules
+neo4j
