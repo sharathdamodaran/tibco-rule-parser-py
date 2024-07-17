@@ -1,10 +1,12 @@
+import re
+
 class Condition:
     def __init__(self, condition_statement=None, values=None):
         self.condition_statement = condition_statement
         self.values = values if values is not None else []
         
     def __init__(self, statement):
-        statements = statement.split("¦")
+        statements = re.split(r'(?<!\|)\|(?!\|)', statement)
         condition_matrix_values = []
         if len(statements) > 1:
             for i in range(1, len(statements[1]), 2):
