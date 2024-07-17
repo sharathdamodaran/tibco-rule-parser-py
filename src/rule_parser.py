@@ -54,16 +54,23 @@ def create_rule(rule_location):
         expressions.append(expression)
     rule.expressions=expressions
 
+    errors = []
     if error_section != "":
-        errors = []
         for statements in [s for s in error_section.split(" ON") if s]:
             error = model.Error(statements)
             errors.append(error)
-        rule.errors = errors
+    rule.errors = errors
 
     return rule
 
-# rule = create_rule("resources/rule_example2.md")
+# for i in range(1, 44):
+#     rule = create_rule("resources/rules/Rule"+str(i))
+#     rule_dict = rule.to_dict()
+#     json_string = json.dumps(rule_dict, indent=2)
+#     print(json_string)
+#     print("Rule Number is =============> ",i)
+    
+# rule = create_rule("resources/rules/Rule34")
 # rule_dict = rule.to_dict()
-# json_string = json.dumps(rule_dict)
-# print(json_string)
+# json_string = json.dumps(rule_dict, indent=2)
+# print(json_string)    

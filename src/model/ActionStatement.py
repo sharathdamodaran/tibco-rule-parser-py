@@ -1,3 +1,5 @@
+import re
+
 class ActionStatement:
     def __init__(self, statement=None, values=None):
         self.statement = statement
@@ -5,7 +7,8 @@ class ActionStatement:
     
     @classmethod
     def create_or_update(cls, action_statement, prev_action):
-        statements = action_statement.split("|")
+        statements = re.split(r'(?<!\|)\|(?!\|)', action_statement)
+
         action_matrix_values = []
         if len(statements) == 1 or not statements[1].strip():
             prev_action.statement=prev_action.statement + "\n" + statements[0]
