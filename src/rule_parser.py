@@ -30,6 +30,10 @@ def create_rule(rule_location):
             continue
         condition = model.Condition(statement.strip())
         conditions.append(condition)
+        
+        is_exist, dependency = model.Dependency.create(statement.strip())
+        if is_exist:
+            dependencies.append(dependency)
 
     prev_action = None
     for statement in action_section.split("\n"):
@@ -39,10 +43,10 @@ def create_rule(rule_location):
         if is_new:
             prev_action=action
             actions.append(action)
+
         is_exist, dependency = model.Dependency.create(statement.strip())
         if is_exist:
             dependencies.append(dependency)
-    rule.dependencies = dependencies
 
     expressions = []
     matrix_length = 1
@@ -59,7 +63,13 @@ def create_rule(rule_location):
         for statements in [s for s in error_section.split(" ON") if s]:
             error = model.Error(statements)
             errors.append(error)
+
+            for statement in statements.split("\n"):
+                is_exist, dependency = model.Dependency.create(statement.strip())
+                if is_exist:
+                    dependencies.append(dependency)
     rule.errors = errors
+    rule.dependencies = dependencies
 
     return rule
 
@@ -70,7 +80,7 @@ def create_rule(rule_location):
 #     print(json_string)
 #     print("Rule Number is =============> ",i)
     
-# rule = create_rule("resources/rules/Rule34")
+# rule = create_rule("resources/rules/Rule32")
 # rule_dict = rule.to_dict()
 # json_string = json.dumps(rule_dict, indent=2)
 # print(json_string)    

@@ -10,7 +10,7 @@ class Dependency:
         statements = re.split(r'(?<!\|)\|(?!\|)', statement)
         if "CALL" in statements[0]:
             return True, cls("Rule", cls.extract_child_rule_name(statements[0]))
-        if re.search(r'([A-Z]{4}_[A-Z]{2}_[A-Z0-9]+)\(\w+(, \w+)*\)', statements[0]):
+        if re.search(r'([A-Z]{4}_[A-Z]{2}_[_A-Z0-9]+)\(\w+(, \w+)*\)', statements[0]):
             return True, cls("Rule", cls.extract_child_rule_name2(statements[0]))
         if "GET" in statements[0]:
             return True, cls("Database", cls.extract_database_table_name(statements[0]))
@@ -32,7 +32,7 @@ class Dependency:
     
     @staticmethod
     def extract_child_rule_name2(statement):
-        pattern = r'([A-Z]{4}_[A-Z]{2}_[A-Z0-9]+)\(\w+(, \w+)*\)'
+        pattern = r'([A-Z]{4}_[A-Z]{2}_[_A-Z0-9]+)\(\w+(, \w+)*\)'
         child_rule_name = re.search(pattern, statement)
         return child_rule_name.group(1)
 
