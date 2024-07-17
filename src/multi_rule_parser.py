@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 from rule_parser import create_rule
@@ -9,7 +10,7 @@ from repository.neo4j_repository import Neo4jRepository
 def write_rules_to_files(base_path, rule_folder, rule_name):
     os.makedirs(base_path + rule_folder, exist_ok=True)
     with open(base_path + rule_name, 'r') as file:
-        rules = file.read().split(" ++++++++++++++++++++++++++++\n")
+        rules = file.read().split(" ++++++++++++++++++++++++++++++++++++++\n")
         for counter, rule in enumerate(rules,start=1):
             rule_path = base_path + rule_folder + "Rule" + str(counter)
             with open(rule_path, 'w') as rule_file:
@@ -17,9 +18,11 @@ def write_rules_to_files(base_path, rule_folder, rule_name):
 
 def create_parent_child_rule_map(base_path: str, rule_folder: str):
     directory_path = os.path.join(base_path, rule_folder)
+    ast_path = os.path.join(base_path, "ast/")
     rule_map = {}
 
     for file_name in os.listdir(directory_path):
+        print(file_name)
         code = ""
         file_path = os.path.join(directory_path, file_name)
         
@@ -27,7 +30,13 @@ def create_parent_child_rule_map(base_path: str, rule_folder: str):
             code = file.read()
 
         rule = create_rule(file_path)
-        rule_map[rule.name] = RuleNode(rule.name, code, "", rule)        
+        rule_map[rule.name] = RuleNode(rule.name, code, "", rule)   
+        rule_dict = rule.to_dict()
+        json_string = json.dumps(rule_dict, indent=2)
+        print(json_string)
+        os.makedirs(ast_path, exist_ok=True)
+        with open(ast_path + rule.name + ".json", 'w') as rule_file:
+                        rule_file.write(json_string)
     return rule_map
 
 def create_neo4j_entries(rule_map):

@@ -3,6 +3,7 @@ from typing import Dict
 from pathlib import Path
 import model.RuleNode, model.Node, model.Relationship
 
+
 def write_rules_to_files(base_path, rule_folder, file_name):
     rule_start_flag = False
     rule_counter = 0
@@ -107,7 +108,7 @@ def create_node_and_relationship(neo4j, base_path, rule_name, rule):
         # with open(file_path, 'a') as file:
         #     file.write(json.dumps(relationship.__dict__) + "\n")
         
-base_path = "src/resources/"
+base_path = "resources/"
 rule_folder = "rules/"
 file_name = "MultiRuleExample.txt"
 # write_rules_to_files(base_path, rule_folder, file_name)
