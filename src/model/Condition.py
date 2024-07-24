@@ -2,7 +2,7 @@ import re
 
 class Condition:
     def __init__(self, condition_statement=None, values=None):
-        self.condition_statement = condition_statement
+        self.condition_statement = condition_statement if condition_statement is not None else ""
         self.values = values if values is not None else []
         
     def __init__(self, statement):
