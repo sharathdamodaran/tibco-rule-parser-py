@@ -1,5 +1,4 @@
 import unittest
-import os
 import sys
 sys.path.append('../../src')
 from model.Condition import Condition
