@@ -1,0 +1,107 @@
+{
+  "name": "EMPLOYEES_RAISE",
+  "summary": "Call this rule to invoke update mode in batch",
+  "unit": "FRAME",
+  "parameters": [
+    "JOBTITLE",
+    "REGION"
+  ],
+  "variables": [
+    "RAISE",
+    "RATE"
+  ],
+  "expressions": [
+    {
+      "type": "Condition",
+      "value": "JOBTITLE = 'SENIOR ANALYST';                                ",
+      "actions": [
+        {
+          "type": null,
+          "value": "RATE = 0.02;",
+          "parameters": [],
+          "dependencies": []
+        },
+        {
+          "type": null,
+          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME ||\u2018NOW EARNS\u2018||            \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
+          "parameters": [],
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "type": "Condition",
+      "value": "JOBTITLE = 'ANALYST';                                       ",
+      "actions": [
+        {
+          "type": null,
+          "value": "RATE = 0.05;",
+          "parameters": [],
+          "dependencies": []
+        },
+        {
+          "type": null,
+          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME ||\u2018NOW EARNS\u2018||            \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
+          "parameters": [],
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "type": "Default",
+      "value": "",
+      "actions": [
+        {
+          "type": null,
+          "value": "RATE = 0.1;",
+          "parameters": [],
+          "dependencies": []
+        },
+        {
+          "type": null,
+          "value": "GET EMPLOYEES(REGION) WHERE POSITION = JOBTITLE;",
+          "parameters": [],
+          "dependencies": []
+        },
+        {
+          "type": null,
+          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME ||\u2018NOW EARNS\u2018||            \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
+          "parameters": [],
+          "dependencies": []
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "type": "Exception",
+      "value": "GETFAIL",
+      "actions": [
+        {
+          "type": null,
+          "value": "CALL ENDMSG('POSITION IS INVALID');",
+          "parameters": [],
+          "dependencies": []
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "type": "Database",
+      "value": "EMPLOYEES"
+    },
+    {
+      "type": "Rule",
+      "value": "REPLACE_SALARY"
+    },
+    {
+      "type": "Rule",
+      "value": "MSGLOG"
+    },
+    {
+      "type": "Rule",
+      "value": "ENDMSG"
+    }
+  ]
+}
