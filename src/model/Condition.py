@@ -13,7 +13,7 @@ class Condition:
                 condition_matrix_values.append(
                     self.convert_condition_value_to_boolean(statements[1][i])
                 )
-        self.condition_statement=statements[0]
+        self.condition_statement=statements[0].strip()
         self.values=condition_matrix_values
     
     def convert_condition_value_to_boolean(self, value):
