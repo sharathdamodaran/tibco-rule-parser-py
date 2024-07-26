@@ -13,7 +13,7 @@
   "expressions": [
     {
       "type": "Condition",
-      "value": "JOBTITLE = 'SENIOR ANALYST';                                ",
+      "value": "JOBTITLE = 'SENIOR ANALYST';",
       "actions": [
         {
           "type": null,
@@ -31,7 +31,7 @@
     },
     {
       "type": "Condition",
-      "value": "JOBTITLE = 'ANALYST';                                       ",
+      "value": "JOBTITLE = 'ANALYST';",
       "actions": [
         {
           "type": null,

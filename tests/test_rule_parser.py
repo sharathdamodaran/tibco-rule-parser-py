@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append('../src')
+sys.path.append('src')
 import model
 from rule_parser import create_rule
 import json
@@ -11,10 +11,10 @@ class TestRuleParser(unittest.TestCase):
         self.maxDiff = None
     
     test_cases = [
-        {"rule_location": "../resources/single_rule_1.txt", "rule_output_location": "../resources/single_rule_1.json"},
-        {"rule_location": "../resources/single_rule_2.txt", "rule_output_location": "../resources/single_rule_2.json"},
-        {"rule_location": "../resources/single_rule_without_conditions.txt", "rule_output_location": "../resources/single_rule_without_conditions.json"},
-        {"rule_location": "../resources/single_rule_without_errors.txt", "rule_output_location": "../resources/single_rule_without_errors.json"},
+        {"rule_location": "resources/single_rule_1.txt", "rule_output_location": "resources/single_rule_1.json"},
+        {"rule_location": "resources/single_rule_2.txt", "rule_output_location": "resources/single_rule_2.json"},
+        {"rule_location": "resources/single_rule_without_conditions.txt", "rule_output_location": "resources/single_rule_without_conditions.json"},
+        {"rule_location": "resources/single_rule_without_errors.txt", "rule_output_location": "resources/single_rule_without_errors.json"},
     ]
 
     def test_rule_parser(self):
