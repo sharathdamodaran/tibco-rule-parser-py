@@ -22,7 +22,6 @@ def create_parent_child_rule_map(base_path: str, rule_folder: str):
     rule_map = {}
 
     for file_name in os.listdir(directory_path):
-        print(file_name)
         code = ""
         file_path = os.path.join(directory_path, file_name)
         
@@ -33,7 +32,6 @@ def create_parent_child_rule_map(base_path: str, rule_folder: str):
         rule_map[rule.name] = RuleNode(rule.name, code, "", rule)   
         rule_dict = rule.to_dict()
         json_string = json.dumps(rule_dict, indent=2)
-        print(json_string)
         os.makedirs(ast_path, exist_ok=True)
         with open(ast_path + rule.name + ".json", 'w') as rule_file:
                         rule_file.write(json_string)
@@ -61,9 +59,9 @@ def create_node_and_relationship(neo4j, rule_node):
         relationship = Relationship(rule_node.name + "_" + child_rule.value, ["Relationship"], node, sub_node, None)
         neo4j.create_relationship(relationship)
 
-base_path = "resources/"
-rule_folder = "rules/"
-rule_name = "rule_example3.md"
-write_rules_to_files(base_path, rule_folder, rule_name)
-rule_map = create_parent_child_rule_map(base_path, rule_folder)
-create_neo4j_entries(rule_map)
+# base_path = "resources/"
+# rule_folder = "rules/"
+# rule_name = "rule_example3.md"
+# write_rules_to_files(base_path, rule_folder, rule_name)
+# rule_map = create_parent_child_rule_map(base_path, rule_folder)
+# create_neo4j_entries(rule_map)
