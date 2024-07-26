@@ -26,9 +26,9 @@ class TestWriteRulesToFiles(unittest.TestCase):
         mock_makedirs.assert_called_once_with(base_path + rule_folder, exist_ok=True)
         
         expected_calls = [
-            call("resources/multi_rule_1.txt", 'r'),  # Expected call for reading
-            call(base_path + rule_folder + "Rule1", 'w'),  # Expected call for writing
-            call(base_path + rule_folder + "Rule2", 'w')  # Expected call for writing
+            call("resources/multi_rule_1.txt", 'r'),
+            call(base_path + rule_folder + "Rule1", 'w'),
+            call(base_path + rule_folder + "Rule2", 'w')
         ]
         self.assertEqual(mock_open.call_args_list, expected_calls)
         
@@ -71,9 +71,9 @@ class TestCreateParentChildRuleMap(unittest.TestCase):
         mock_makedirs.assert_called_once_with(base_path + ast_folder, exist_ok=True)
         
         expected_calls = [
-            call(base_path + rule_folder + "Rule1", 'r'),  # Expected call for writing
-            call(base_path + rule_folder + "Rule1", 'r'),  # Expected call for writing
-            call(base_path + ast_folder + "EMPLOYEES_RAISE.json", 'w')  # Expected call for writing
+            call(base_path + rule_folder + "Rule1", 'r'),
+            call(base_path + rule_folder + "Rule1", 'r'),
+            call(base_path + ast_folder + "EMPLOYEES_RAISE.json", 'w')
         ]
         self.assertEqual(mock_open.call_args_list, expected_calls)
         self.assertEqual(len(rule_map), 1)

@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append('../../src')
+sys.path.append('src')
 from model.Error import Error
 
 class TestError(unittest.TestCase):

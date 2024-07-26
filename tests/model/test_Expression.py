@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append('../../src')
+sys.path.append('src')
 from model.Condition import Condition
 from model.ActionStatement import ActionStatement
 from model.Expression import Expression
