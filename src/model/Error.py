@@ -14,7 +14,7 @@ class Error:
             elif ";" in statement:
                 action = Action()
                 action.value=statement.strip()
-        actions.append(action)
+                actions.append(action)
         self.type = "Exception"
         self.actions = actions
             

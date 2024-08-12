@@ -13,17 +13,17 @@
   "expressions": [
     {
       "type": "Condition",
-      "value": "JOBTITLE = 'SENIOR ANALYST';                                ",
+      "value": "JOBTITLE = 'SENIOR ANALYST';",
       "actions": [
         {
           "type": null,
-          "value": "RATE = 0.1;",
+          "value": "RATE = 0.02;",
           "parameters": [],
           "dependencies": []
         },
         {
           "type": null,
-          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
+          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME ||\u2018NOW EARNS\u2018||            \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
           "parameters": [],
           "dependencies": []
         }
@@ -31,7 +31,7 @@
     },
     {
       "type": "Condition",
-      "value": "JOBTITLE = 'ANALYST';                                       ",
+      "value": "JOBTITLE = 'ANALYST';",
       "actions": [
         {
           "type": null,
@@ -41,7 +41,7 @@
         },
         {
           "type": null,
-          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
+          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME ||\u2018NOW EARNS\u2018||            \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
           "parameters": [],
           "dependencies": []
         }
@@ -53,7 +53,7 @@
       "actions": [
         {
           "type": null,
-          "value": "RATE = 0.02;",
+          "value": "RATE = 0.1;",
           "parameters": [],
           "dependencies": []
         },
@@ -65,7 +65,7 @@
         },
         {
           "type": null,
-          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
+          "value": "FORALL EMPLOYEES.SALARY * RATE;\nEMPLOYEES.SALARY = EMPLOYEES.SALARY + RAISE;           \nCALL REPLACE_SALARY(REGION);                           \nCALL MSGLOG(EMPLOYEES.LNAME ||\u2018NOW EARNS\u2018||            \nEMPLOYEES.SALARY);                                     \nEND;                                                        ",
           "parameters": [],
           "dependencies": []
         }
@@ -98,6 +98,10 @@
     {
       "type": "Rule",
       "value": "MSGLOG"
+    },
+    {
+      "type": "Rule",
+      "value": "ENDMSG"
     }
   ]
 }

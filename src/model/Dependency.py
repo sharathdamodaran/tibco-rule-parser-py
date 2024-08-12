@@ -8,11 +8,11 @@ class Dependency:
     @classmethod
     def create(cls, statement):
         statements = re.split(r'(?<!\|)\|(?!\|)', statement)
-        if "CALL" in statements[0]:
+        if "CALL " in statements[0]:
             return True, cls("Rule", cls.extract_child_rule_name(statements[0]))
         if re.search(r'([A-Z]{4}_[A-Z]{2}_[_A-Z0-9]+)\(\w+(, \w+)*\)', statements[0]):
             return True, cls("Rule", cls.extract_child_rule_name2(statements[0]))
-        if "GET" in statements[0]:
+        if "GET " in statements[0]:
             return True, cls("Database", cls.extract_database_table_name(statements[0]))
         return False, None
 
