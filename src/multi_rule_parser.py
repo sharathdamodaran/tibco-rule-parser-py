@@ -29,7 +29,7 @@ def create_parent_child_rule_map(base_path: str, rule_folder: str):
             code = file.read()
 
         rule = create_rule(file_path)
-        rule_map[rule.name] = RuleNode(rule.name, code, "", rule)   
+        rule_map[rule.name] = RuleNode(rule.name, code, "", rule, [])   
         rule_dict = rule.to_dict()
         json_string = json.dumps(rule_dict, indent=2)
         os.makedirs(ast_path, exist_ok=True)

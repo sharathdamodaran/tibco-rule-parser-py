@@ -8,9 +8,9 @@ class RuleUtil:
 
     def get_rule(self, id: str) -> RuleNode:
         record = self.neo4j.get_node(id)
-        properties = record['n'].as_node().as_map()
+        properties = dict(record['n'].items())
         code = properties.get('code', '')
-        rule = RuleNode(properties['id'], code, '', None)
+        rule = RuleNode(properties['id'], code, '', None, None)
         return rule
 
     def update_summary(self, id: str, summary: str):
@@ -20,8 +20,8 @@ class RuleUtil:
         child_rules = []
         records = self.neo4j.get_child_node(id)
         for record in records:
-            properties = record['c'].as_node().as_map()
+            properties = dict(record['c'].items())
             code = properties.get('code', '')
             summary = properties.get('summary', '')
-            child_rules.append(RuleNode(properties['id'], code, summary, []))
+            child_rules.append(RuleNode(properties['id'], code, summary, None, None))
         return child_rules

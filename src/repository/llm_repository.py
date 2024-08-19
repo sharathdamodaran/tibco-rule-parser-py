@@ -21,8 +21,11 @@ class LLMRepository:
             for line in response.iter_lines():
                 if line:
                     line_json = json.loads(line)
-                    llm_response = LLMResponse(**line_json)
-                    result.append(llm_response.response)
+                    if 'done_reason' in line_json:
+                        print(line_json)
+                    else:
+                        llm_response = LLMResponse(**line_json)
+                        result.append(llm_response.response)
             
             return ''.join(result)
         except Exception as ex:

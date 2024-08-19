@@ -29,7 +29,7 @@ class PromptEngineeringUtil:
         message = message.replace("\n", "\\n").replace("\r", "\\r")
 
         prompt_json = json.dumps({
-            "model": "wizardcoder",
+            "model": "mistral",
             "prompt": message,
             "options": {"num_ctx": 4096}
         })

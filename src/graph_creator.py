@@ -37,3 +37,6 @@ def update_summaries():
             rules_util.update_summary(rule_id, rule_summary)
     
     neo4j.close()
+    
+# update_node_levels()
+# update_summaries()    
